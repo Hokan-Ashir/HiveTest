@@ -1,0 +1,6 @@
+Make screenshots pairs for all results (x.1 = with query and x.2 with result in Hive Ambari)
+1. Store dataset http://stat-computing.org/dataexpo/2009/the-data.html (year 2007 + additional data from http://stat-computing.org/dataexpo/2009/supplemental-data.html only Airports and Carrier Codes) on HDFS and expose it through Hive 
+2. Count total number of flights per carrier in 2007 (Make screenshot #1.1 and 1.2)
+3. The total number of flights served in Jun 2007 by NYC (all airports, use join with Airports data). (Make screenshot #2.1 and 2.2)
+4. Find five most busy airports in US during Jun 01 - Aug 31. (Make screenshot #3.1 and 3.2)
+5. Find the carrier who served the biggest number of flights (Make screenshot #4.1 and 4.2)
