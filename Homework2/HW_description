@@ -1,0 +1,7 @@
+Use dataset from Hive_HW_1:
+
+Find all carriers who cancelled more than 1 flights during 2007, order them from biggest to lowest by number of cancelled
+ flights and list in each record all departure cities where cancellation happened.
+ How many MR jobs where instanced for this query?
+
+Hint: you can use temporary tables to solve this task
