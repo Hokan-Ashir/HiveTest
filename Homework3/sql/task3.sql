@@ -16,10 +16,14 @@ create table cityToValue as
 select max(cnt) as value, city from tempExtracted
 group by city;
 
-select cityToValue.value, cityToValue.city, tempExtracted.DeviceTypeName
+select result.value, result.DeviceTypeName, cities.name from
+(select cityToValue.value, cityToValue.city, tempExtracted.DeviceTypeName
 from
 cityToValue
 join
 tempExtracted
 on (cityToValue.value = tempExtracted.cnt
-   and cityToValue.city = tempExtracted.city);
+   and cityToValue.city = tempExtracted.city)) as result
+join
+cities
+on result.city = cities.code;
