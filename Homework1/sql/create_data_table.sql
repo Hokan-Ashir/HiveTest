@@ -17,6 +17,7 @@ CREATE TABLE Data (
   FlightNum INT,
   TailNum STRING,
   ActualElapsedTime INT,
+  CRSElapsedTime INT,
   AirTime INT,
   ArrDelay INT,
   DepDelay INT,

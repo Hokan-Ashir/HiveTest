@@ -8,7 +8,6 @@ carriers
 on result.UniqueCarrier = carriers.code;
 
 --The total number of flights served in Jun 2007 by NYC (all airports, use join with Airports data)
---TODO data.Origin is a number, "should be" a IATA of an airport from airports table, but those table have only strings
 select count(1) from (
 select * from data JOIN airports on (data.Origin = airports.iata)
   where data.Month = 6 and airports.city = 'New York'
@@ -26,7 +25,6 @@ select count(1) as cnt, result.iata from (
  select * from data JOIN airports on (data.Dest = airports.iata)
   where data.Month >= 6 and data.Month <= 8
 ) as result
-
 group by result.iata
 order by cnt desc limit 5;
 
