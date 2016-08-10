@@ -6,4 +6,4 @@ select count(1) as cnt, result.iata from (
   where data.Month >= 6 and data.Month <= 8
 ) as result
 group by result.iata
-order by cnt desc limit 5;
+order by cnt desc limit 5

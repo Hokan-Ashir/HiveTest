@@ -27,7 +27,7 @@ public class JMHQueriesTest {
     private static final String USER_NAME = "hive";
     private static final String PASSWORD = "hive";
 
-    private static final int NUMBER_OF_ITERATIONS = 10;
+    private static final int NUMBER_OF_ITERATIONS = 20;
     private static final int NUMBER_OF_FORKS = 1;
     private static final String RESULT_FILE_NAME = "result.csv";
     private static final int SECONDS_TIMEOUT = 10;
@@ -66,14 +66,14 @@ public class JMHQueriesTest {
 
     private void createQueryMap() {
         for (String s : queryMapFilesNameList) {
-            String fileName = QUERY_DIRECTORY + File.separator + QUERY_1_FILE_NAME;
+            String fileName = QUERY_DIRECTORY + File.separator + s;
             String fileContent = getQueryFileContent(fileName);
             queryMap.put(s, fileContent);
         }
     }
 
     private String getQueryFileContent(String fileName) {
-        StringBuilder result = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
         ClassLoader classLoader = getClass().getClassLoader();
         File file;
@@ -87,7 +87,7 @@ public class JMHQueriesTest {
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                result.append(line).append("\n");
+                builder.append(line).append("\n");
             }
             scanner.close();
         } catch (IOException e) {
@@ -95,7 +95,7 @@ public class JMHQueriesTest {
             return null;
         }
 
-        return result.toString();
+        return builder.toString();
 
     }
 
@@ -113,26 +113,26 @@ public class JMHQueriesTest {
         }
     }
 
-//    @Benchmark
-//    public ResultSet executeQuery2() throws SQLException {
-//        try (Statement statement = connection.createStatement()) {
-//            return statement.executeQuery(queryMap.get(QUERY_2_FILE_NAME));
-//        }
-//    }
-//
-//    @Benchmark
-//    public ResultSet executeQuery3() throws SQLException {
-//        try (Statement statement = connection.createStatement()) {
-//            return statement.executeQuery(queryMap.get(QUERY_3_FILE_NAME));
-//        }
-//    }
-//
-//    @Benchmark
-//    public ResultSet executeQuery4() throws SQLException {
-//        try (Statement statement = connection.createStatement()) {
-//            return statement.executeQuery(queryMap.get(QUERY_4_FILE_NAME));
-//        }
-//    }
+    @Benchmark
+    public ResultSet executeQuery2() throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            return statement.executeQuery(queryMap.get(QUERY_2_FILE_NAME));
+        }
+    }
+
+    @Benchmark
+    public ResultSet executeQuery3() throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            return statement.executeQuery(queryMap.get(QUERY_3_FILE_NAME));
+        }
+    }
+
+    @Benchmark
+    public ResultSet executeQuery4() throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            return statement.executeQuery(queryMap.get(QUERY_4_FILE_NAME));
+        }
+    }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
