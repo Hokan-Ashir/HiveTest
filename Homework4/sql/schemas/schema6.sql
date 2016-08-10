@@ -2,9 +2,9 @@ CREATE DATABASE IF NOT EXISTS homework1;
 
 USE homework1;
 
-DROP Table Data_ORC;
+DROP Table Data_CLUSTERED;
 
-CREATE TABLE Data_ORC (
+CREATE TABLE Data_CLUSTERED (
   Year INT,
   Month INT,
   DayOfMonth INT,
@@ -34,6 +34,9 @@ CREATE TABLE Data_ORC (
   NASDelay INT,
   SecurityDelay INT,
   LateAircraftDelay INT
-) stored as orc tblproperties ("orc.compress"="NONE");
+)
+clustered by (UniqueCarrier) into 32 buckets
+row format delimited fields terminated by ','
+stored as textfile tblproperties("skip.header.line.count"="1");
 
-INSERT INTO TABLE Data_ORC SELECT * FROM Data;
+INSERT INTO TABLE Data_CLUSTERED SELECT * FROM Data;
